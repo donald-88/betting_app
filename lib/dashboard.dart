@@ -14,6 +14,9 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  List slips = [];
+  List filteredList = [];
+
   getOddsData() async {
     var response = await http.get(
         Uri.https('api.betting-api.com', '1xbet/football/live/all'),
@@ -23,13 +26,21 @@ class _DashboardState extends State<Dashboard> {
         });
 
     var jsonData = jsonDecode(response.body);
-    List<Slip> slips = [];
 
     for (var s in jsonData) {
-      Slip slip = Slip(s['team1'], s['team2'], s['type']);
+      Slip slip = Slip(s['team1'], s['team2'], s['title'], s['score1'], s['score2'], s['minute'], s['seconds']);
       slips.add(slip);
     }
-    return slips;
+
+    for (var filter in slips.where((element) => element.title == 'UEFA Nations League')) {
+      filteredList.add(filter);
+    }
+    return filteredList;
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -57,11 +68,11 @@ class _DashboardState extends State<Dashboard> {
           children: [
             const SizedBox(height: 20),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               height: 50,
               decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 61, 61, 61),
+                  color: Color.fromRGBO(61, 61, 61, 1),
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -70,7 +81,7 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       const Text(
                         "League",
-                        style: TextStyle(color: Colors.white, fontSize: 17),
+                        style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       IconButton(
                         splashRadius: 16,
@@ -87,7 +98,7 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       const Text(
                         "Bet Type",
-                        style: TextStyle(color: Colors.white, fontSize: 17),
+                        style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       IconButton(
                         splashRadius: 16,
@@ -116,8 +127,13 @@ class _DashboardState extends State<Dashboard> {
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
                             return MyCard(
-                                team1: snapshot.data[index].team1,
-                                team2: snapshot.data[index].team2);
+                              team1: snapshot.data[index].team1,
+                              team2: snapshot.data[index].team2,
+                              score1: snapshot.data[index].score1.toString(),
+                              score2: snapshot.data[index].score2.toString(),
+                              minute: snapshot.data[index].minute.toString(),
+                              seconds: snapshot.data[index].seconds.toString(),
+                            );
                           });
                     }
                   }),
@@ -152,7 +168,8 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class Slip {
-  final String team1, team2, type;
+  final String team1, team2, title;
+  final int score1, score2, minute, seconds;
 
-  Slip(this.team1, this.team2, this.type);
+  Slip(this.team1, this.team2,this.title, this.score1, this.score2, this.minute, this.seconds);
 }
