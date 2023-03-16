@@ -23,8 +23,8 @@ class MyCard extends StatelessWidget {
     return Container(
       decoration:  BoxDecoration(
           color: Colors.grey.shade800,
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          borderRadius: const BorderRadius.all(Radius.circular(12))),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Center(
         child: SizedBox(
