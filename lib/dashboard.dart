@@ -21,15 +21,6 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 41, 41, 41),
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 41, 41, 41),
-        title: const Text(
-          "Get Money!!!",
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

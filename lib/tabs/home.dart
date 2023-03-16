@@ -42,6 +42,8 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
+            Text("Get Money!!", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+            SizedBox(height: 28),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
