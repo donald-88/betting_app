@@ -1,6 +1,7 @@
 import 'package:betting_app/tabs/home.dart';
 import 'package:betting_app/tabs/myNotifications.dart';
 import 'package:betting_app/tabs/wallet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -32,52 +33,32 @@ class _DashboardState extends State<Dashboard> {
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
+          selectedFontSize: 14,
+          unselectedFontSize: 12,
           selectedItemColor: Colors.white,
-          unselectedItemColor: const Color.fromARGB(255, 151, 151, 151),
+          unselectedItemColor: Colors.grey.shade500,
+          selectedIconTheme: const CupertinoIconThemeData(color: Colors.white, fill: 1),
+          unselectedIconTheme: const CupertinoIconThemeData(color: Colors.grey),
           currentIndex: currentIndex,
           onTap: (index) => setState(() => currentIndex = index),
           backgroundColor: const Color.fromARGB(255, 41, 41, 41),
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(
-                  Iconsax.home,
-                  color: Color.fromARGB(255, 151, 151, 151),
+                  CupertinoIcons.home,
                 ),
                 label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Iconsax.notification,
-                  color: Color.fromARGB(255, 151, 151, 151),
+                  CupertinoIcons.bell,
                 ),
                 label: 'Notifications'),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Iconsax.wallet,
-                  color: Color.fromARGB(255, 151, 151, 151),
+                  CupertinoIcons.money_dollar,
                 ),
                 label: 'Wallet')
           ]),
     );
   }
-}
-
-class Slip {
-  final String team1, team2, title;
-  final int score1, score2, minute, seconds /*type*/;
-  // final Map markets, over, under, totals;
-
-  Slip(
-      this.team1,
-      this.team2,
-      this.title,
-      this.score1,
-      this.score2,
-      this.minute,
-      this.seconds,
-      // this.markets,
-      // this.totals,
-      // this.over,
-      // this.under,
-      // this.v,
-      );
 }

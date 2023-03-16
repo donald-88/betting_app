@@ -14,8 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-    List slips = [];
-  List filteredList = [];
   
   
 
@@ -30,26 +28,6 @@ class _HomeState extends State<Home> {
         });
 
     List jsonData = jsonDecode(response.body);
-    print(jsonData);
-
-    // for (var s in jsonData) {
-    //   Slip slip = Slip(
-    //       s['team1'],
-    //       s['team2'],
-    //       s['title'],
-    //       s['score1'],
-    //       s['score2'],
-    //       s['minute'],
-    //       s['seconds'],
-    //       // s['markets'],
-    //       // s['totals'],
-    //       // s['over'],
-    //       // s['under'],
-    //       // s['v'],
-    //     );
-    //   slips.add(slip);
-      
-    // }
 
     List filtered = jsonData.where((element) => element['title'] == league).toList();
     

@@ -21,10 +21,10 @@ class MyCard extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Container(
-      decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 61, 61, 61),
-          borderRadius: BorderRadius.all(Radius.circular(25))),
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+      decoration:  BoxDecoration(
+          color: Colors.grey.shade800,
+          borderRadius: const BorderRadius.all(Radius.circular(10))),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Center(
         child: SizedBox(
