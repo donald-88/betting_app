@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
   
   
 
-  final String league = 'UEFA Nations League';
+  final String league = 'UEFA Europa League';
 
   getOddsData() async {
     var response = await http.get(
@@ -29,32 +29,33 @@ class _HomeState extends State<Home> {
               '58be903e11884db0a97eea600fda6bfe271c174c668d48e4bf56f11b3ac19cd8'
         });
 
-    var jsonData = jsonDecode(response.body);
+    List jsonData = jsonDecode(response.body);
+    print(jsonData);
 
-    for (var s in jsonData) {
-      Slip slip = Slip(
-          s['team1'],
-          s['team2'],
-          s['title'],
-          s['score1'],
-          s['score2'],
-          s['minute'],
-          s['seconds'],
-          s['markets'],
-          s['totals'],
-          s['over'],
-          s['under'],
-          s['v'],
-          s['type']);
-      slips.add(slip);
-    }
+    // for (var s in jsonData) {
+    //   Slip slip = Slip(
+    //       s['team1'],
+    //       s['team2'],
+    //       s['title'],
+    //       s['score1'],
+    //       s['score2'],
+    //       s['minute'],
+    //       s['seconds'],
+    //       // s['markets'],
+    //       // s['totals'],
+    //       // s['over'],
+    //       // s['under'],
+    //       // s['v'],
+    //     );
+    //   slips.add(slip);
+      
+    // }
 
-    for (var filter in slips.where((element) => element.title == league)) {
-      print(filter.markets['totals']);
-      filteredList.add(filter);
-    }
-    return filteredList;
+    List filtered = jsonData.where((element) => element['title'] == league).toList();
+    
+    return filtered;
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -90,12 +91,12 @@ class _HomeState extends State<Home> {
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
                             return MyCard(
-                              team1: snapshot.data[index].team1,
-                              team2: snapshot.data[index].team2,
-                              score1: snapshot.data[index].score1.toString(),
-                              score2: snapshot.data[index].score2.toString(),
-                              minute: snapshot.data[index].minute.toString(),
-                              seconds: snapshot.data[index].seconds.toString(),
+                              team1: snapshot.data[index]['team1'],
+                              team2: snapshot.data[index]['team2'],
+                              score1: snapshot.data[index]['score1'].toString(),
+                              score2: snapshot.data[index]['score2'].toString(),
+                              minute: snapshot.data[index]['minute'].toString(),
+                              seconds: snapshot.data[index]['seconds'].toString(),
                             );
                           });
                     }

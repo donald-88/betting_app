@@ -17,25 +17,14 @@ class _DashboardState extends State<Dashboard> {
   final screens = [const Home(), const MyNotifications(), const Wallet()];
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 41, 41, 41),
       appBar: AppBar(
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {},
-          splashRadius: 16,
-          icon: const Icon(Iconsax.menu),
-          color: Colors.white,
-        ),
         backgroundColor: const Color.fromARGB(255, 41, 41, 41),
         title: const Text(
-          "Get Money Gang",
+          "Get Money!!!",
           style: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ),
@@ -74,8 +63,8 @@ class _DashboardState extends State<Dashboard> {
 
 class Slip {
   final String team1, team2, title;
-  final int score1, score2, minute, seconds, v, type;
-  final Map markets, over, under, totals;
+  final int score1, score2, minute, seconds /*type*/;
+  // final Map markets, over, under, totals;
 
   Slip(
       this.team1,
@@ -85,10 +74,10 @@ class Slip {
       this.score2,
       this.minute,
       this.seconds,
-      this.markets,
-      this.totals,
-      this.over,
-      this.under,
-      this.v,
-      this.type);
+      // this.markets,
+      // this.totals,
+      // this.over,
+      // this.under,
+      // this.v,
+      );
 }
