@@ -38,6 +38,8 @@ class _HomeState extends State<Home> {
     Colors.orange.shade300
   ];
   
+  List filterOptions = ['English Premier League', 'Spanish La Liga', 'Bundesliga', 'Italian Serie A', 'ligue 1', 'UEFA Champions League', 'UEFA Europa League'];
+  List selectedFilters = [];
   
 
   final String league = 'UEFA Europa League';
@@ -52,9 +54,13 @@ class _HomeState extends State<Home> {
 
     List jsonData = jsonDecode(response.body);
 
-    List filtered = jsonData.where((element) => element['title'] == league).toList();
+    jsonData.where((element) => element['markets']['totals']);
+
+    List filteredList = jsonData.where((element){
+      return selectedFilters.contains(element['title']);
+    }).toList();
     
-    return filtered;
+    return jsonData;
   }
   
 
@@ -66,8 +72,7 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 8),
-              const Text("Get Money!!", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+              const Text("Get Money!!", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
               const SizedBox(height: 28),
               SizedBox(
                 height: 40,
@@ -78,7 +83,11 @@ class _HomeState extends State<Home> {
                   itemBuilder: (context, index){
                   return Container(
                     margin: EdgeInsets.symmetric(horizontal: 4),
-                    child: FilterChip(label: Text(leagues[index]),selectedColor: Colors.amber ,onSelected: (bool value){}));
+                    child: FilterChip(label: Text(leagues[index]),selected: selectedFilters.contains(leagues[index]),selectedColor: Colors.amber,checkmarkColor: Colors.white ,onSelected: (isSelected){
+                      setState(() {
+                        isSelected? selectedFilters.add(filterOptions[index]) : selectedFilters.remove(filterOptions[index]);
+                      });
+                    }));
                 }),
               ),
               SizedBox(height: 8),
@@ -114,7 +123,7 @@ class _HomeState extends State<Home> {
                                 score1: snapshot.data[index]['score1'].toString(),
                                 score2: snapshot.data[index]['score2'].toString(),
                                 minute: snapshot.data[index]['minute'].toString(),
-                                seconds: snapshot.data[index]['seconds'].toString(),
+                                odds: snapshot.data[index]['markets']['totals'][0]['over']['v'].toString(),
                               );
                             });
                       }

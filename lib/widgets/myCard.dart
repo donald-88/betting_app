@@ -6,7 +6,7 @@ class MyCard extends StatelessWidget {
   final String score1;
   final String score2;
   final String minute;
-  final String seconds;
+  final String odds;
 
   const MyCard(
       {required this.team1,
@@ -14,13 +14,13 @@ class MyCard extends StatelessWidget {
       required this.score1,
       required this.score2,
       required this.minute,
-      required this.seconds});
+      required this.odds});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    TextStyle winText = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold);
-    TextStyle loseText = TextStyle(color: Colors.white, fontSize: 14,);
+    TextStyle winText = const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold);
+    TextStyle loseText = const TextStyle(color: Colors.white, fontSize: 14,);
 
     return Container(
       width: width-32,
@@ -35,10 +35,10 @@ class MyCard extends StatelessWidget {
           Container(
             width: 80,
             height: 90,
-            decoration: BoxDecoration(color: Colors.red.shade100, borderRadius: const BorderRadius.all(Radius.circular(12))),
-            child: Center(child: Text("x1.0",style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),)),
+            decoration: BoxDecoration(color: Colors.deepPurple.shade100, borderRadius: const BorderRadius.all(Radius.circular(12))),
+            child:  Center(child: Text("x$odds",style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),)),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           SizedBox(
             width: width-192,
             child: Column(
@@ -48,7 +48,7 @@ class MyCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(team1, style: winText),
+                    Expanded(child: Text(team1, style: winText, overflow: TextOverflow.ellipsis,)),
                     Text(score1, style: winText,)
                   ],
                 ),
@@ -56,7 +56,7 @@ class MyCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(team2, style: loseText),
+                    Expanded(child: Text(team2, style: loseText, overflow: TextOverflow.ellipsis,)),
                     Text(score2, style: loseText,)
                   ],
                 )

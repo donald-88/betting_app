@@ -19,9 +19,10 @@ class _MyNotificationsState extends State<MyNotifications> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          
           children: [
-          MyCard(team1: 'Manchester United', team2: 'Chelsea', score1: '4', score2: '1', minute: '10', seconds: '0')
+            Text('Notifications', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
+            SizedBox(height: 20,),
+          MyCard(team1: 'Manchester United', team2: 'Chelsea', score1: '4', score2: '1', minute: '10', odds: '0')
         ]),
       ),
     );
