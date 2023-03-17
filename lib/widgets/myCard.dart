@@ -19,86 +19,55 @@ class MyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    TextStyle winText = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold);
+    TextStyle loseText = TextStyle(color: Colors.white, fontSize: 14,);
+
     return Container(
+      width: width-32,
       decoration:  BoxDecoration(
           color: Colors.grey.shade800,
           borderRadius: const BorderRadius.all(Radius.circular(12))),
       margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Center(
-        child: SizedBox(
-            height: 100,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            width: 80,
+            height: 90,
+            decoration: BoxDecoration(color: Colors.red.shade100, borderRadius: const BorderRadius.all(Radius.circular(12))),
+            child: Center(child: Text("x1.0",style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),)),
+          ),
+          SizedBox(width: 10),
+          SizedBox(
+            width: width-192,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: (width - 20) / 2.5,
-                          child: Text(
-                            team1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 14),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Text(
-                          score1,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 17),
-                        )
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text('vs',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 14))
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: (width - 20) / 2.5,
-                          child: Text(
-                            team2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 14),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Text(
-                          score2,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 17),
-                        )
-                      ],
-                    )
+                    Text(team1, style: winText),
+                    Text(score1, style: winText,)
                   ],
                 ),
+                const SizedBox(height: 4),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center ,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Time - $minute : $seconds",
-                      style: const TextStyle(fontSize: 14, color: Colors.white),
-                    )
+                    Text(team2, style: loseText),
+                    Text(score2, style: loseText,)
                   ],
                 )
               ],
-            )),
+            ),
+          ),
+          SizedBox(
+            width: 60,
+            child: Center(child: Text(minute + r'`', style: winText,)))
+          
+        ],
       ),
     );
   }
