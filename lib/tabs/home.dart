@@ -28,6 +28,8 @@ class _HomeState extends State<Home> {
     1.0,1.1,1.2,1.3
   ];
 
+  List oddsType = [];
+
   List<Color> chipColors = [
     Colors.amber.shade300,
     Colors.green.shade300,
@@ -82,7 +84,7 @@ class _HomeState extends State<Home> {
                   itemCount: leagues.length,
                   itemBuilder: (context, index){
                   return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 4),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
                     child: FilterChip(label: Text(leagues[index]),selected: selectedFilters.contains(leagues[index]),selectedColor: Colors.amber,checkmarkColor: Colors.white ,onSelected: (isSelected){
                       setState(() {
                         isSelected? selectedFilters.add(filterOptions[index]) : selectedFilters.remove(filterOptions[index]);
@@ -90,7 +92,7 @@ class _HomeState extends State<Home> {
                     }));
                 }),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               SizedBox(
                 height: 40,
                 width: double.infinity,
@@ -99,7 +101,7 @@ class _HomeState extends State<Home> {
                   itemCount: odds.length,
                   itemBuilder: (context, index){
                   return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 4),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
                     child: FilterChip(
                       label: Text('x${odds[index].toString()}'), onSelected: (bool value){}));
                 }),
@@ -123,7 +125,8 @@ class _HomeState extends State<Home> {
                                 score1: snapshot.data[index]['score1'].toString(),
                                 score2: snapshot.data[index]['score2'].toString(),
                                 minute: snapshot.data[index]['minute'].toString(),
-                                odds: snapshot.data[index]['markets']['totals'][0]['over']['v'].toString(),
+                                odds: '1.0',
+                                color: chipColors[0],
                               );
                             });
                       }

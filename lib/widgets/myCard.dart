@@ -7,6 +7,7 @@ class MyCard extends StatelessWidget {
   final String score2;
   final String minute;
   final String odds;
+  final Color color;
 
   const MyCard(
       {required this.team1,
@@ -14,13 +15,14 @@ class MyCard extends StatelessWidget {
       required this.score1,
       required this.score2,
       required this.minute,
-      required this.odds});
+      required this.odds,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    TextStyle winText = const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold);
-    TextStyle loseText = const TextStyle(color: Colors.white, fontSize: 14,);
+    TextStyle winText = const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold);
+    TextStyle loseText = const TextStyle(color: Colors.white, fontSize: 12,);
 
     return Container(
       width: width-32,
@@ -29,18 +31,17 @@ class MyCard extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(12))),
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             width: 80,
             height: 90,
-            decoration: BoxDecoration(color: Colors.deepPurple.shade100, borderRadius: const BorderRadius.all(Radius.circular(12))),
+            decoration: BoxDecoration(color: color, borderRadius: const BorderRadius.all(Radius.circular(12))),
             child:  Center(child: Text("x$odds",style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),)),
           ),
           const SizedBox(width: 10),
           SizedBox(
-            width: width-192,
+            width: width - 138,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,24 +49,48 @@ class MyCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Expanded(child: Text(team1, style: winText, overflow: TextOverflow.ellipsis,)),
-                    Text(score1, style: winText,)
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(team1, style: winText,overflow: TextOverflow.ellipsis,),
+                          const SizedBox(height: 5,),
+                          Text(team2, style: loseText,overflow: TextOverflow.ellipsis,)
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 32,
+                      child: Column(
+                        children: [
+                          Text(score1, style: winText,),
+                          const SizedBox(height: 5,),
+                          Text(score2, style: loseText,),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 32,
+                      child: Text('$minute`' , style: winText,))
                   ],
                 ),
-                const SizedBox(height: 4),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(child: Text(team2, style: loseText, overflow: TextOverflow.ellipsis,)),
-                    Text(score2, style: loseText,)
-                  ],
-                )
+                 Divider(
+                  thickness: 1,color: Colors.grey.shade700,
+                ),
+                Row(children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.pink.shade100, borderRadius: const BorderRadius.all(Radius.circular(25))
+                    ),child: const Text("BTS",style: TextStyle(fontSize: 10),),
+                  )
+                ],),
+                
               ],
             ),
           ),
-          SizedBox(
-            width: 60,
-            child: Center(child: Text(minute + r'`', style: winText,)))
+          
           
         ],
       ),

@@ -22,7 +22,7 @@ class _MyNotificationsState extends State<MyNotifications> {
           children: [
             Text('Notifications', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
             SizedBox(height: 20,),
-          MyCard(team1: 'Manchester United', team2: 'Chelsea', score1: '4', score2: '1', minute: '10', odds: '0')
+          MyCard(team1: 'Manchester United', team2: 'Chelsea', score1: '4', score2: '1', minute: '10', odds: '0', color: Colors.green,)
         ]),
       ),
     );
