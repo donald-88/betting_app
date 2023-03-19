@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
     'LFP',
     'DFL',
     'Serie A',
+    'FA Cup',
     'Ligue 1',
     'UCL',
     'UEL',
@@ -42,11 +43,12 @@ class _HomeState extends State<Home> {
     'Spain. La Liga',
     'Germany. Bundesliga',
     'Italy. Serie A',
+    'Engalnd. FA Cup',
     'France. Ligue 1',
     'UEFA Champions League',
     'UEFA Europa League',
   ];
-  List selectedFilters = [];
+  List selectedFilters = ['England. Premier League'];
 
   final String league = 'UEFA Europa League';
 
@@ -66,7 +68,7 @@ class _HomeState extends State<Home> {
       return selectedFilters.contains(element['title']);
     }).toList();
 
-    return jsonData;
+    return filteredList;
   }
 
   @override
@@ -100,7 +102,7 @@ class _HomeState extends State<Home> {
                             selected:
                                 selectedFilters.contains(filterOptions[index]),
                             selectedColor: Colors.amber,
-                            checkmarkColor: Colors.white,
+                            checkmarkColor: Colors.black,
                             onSelected: (isSelected) {
                               setState(() {
                                 isSelected
